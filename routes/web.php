@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BrandsController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoriesController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,9 +78,25 @@ Route::get('admin/kategori', [App\Http\Controllers\CategoriesController::class, 
     ->middleware('is_admin');
 
 
-//Route Brands
+//ROUTE UTAMA BRANDS
 Route::get('admin/merek', [App\Http\Controllers\BrandsController::class, 'index'])
     ->name('admin.merek')
+    ->middleware('is_admin');
+
+//route tambah brands
+Route::post('admin/merek', [BrandsController::class, 'add_brand'])
+    ->name('admin.brand.submit')
+    ->middleware('is_admin');
+
+//route edit brands
+Route::patch('admin/merek/update', [BrandsController::class, 'update_brands'])
+    ->name('admin.brand.update')
+    ->middleware('is_admin');
+Route::get('admin/ajaxadmin/dataBrands/{id}', [BrandsController::class, 'getDataBrands']);
+
+//route delete brands
+Route::delete('admin/merek/delete', [BrandsController::class, 'delete_brands'])
+    ->name('admin.brand.delete')
     ->middleware('is_admin');
 
 

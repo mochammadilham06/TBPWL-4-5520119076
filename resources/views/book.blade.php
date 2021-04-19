@@ -169,7 +169,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Apakah anda yakin akan menghapus data tersebut?
+                Apakah anda yakin akan menghapus data <strong class="font-italic">{{$book->judul}}</strong>?
                 <form method="post" action="{{ route('admin.book.delete') }}" enctype="multipart/form-data">
                     @csrf
                     @method('DELETE')
