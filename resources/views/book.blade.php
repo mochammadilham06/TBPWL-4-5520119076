@@ -53,7 +53,7 @@
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <button type="button" id="btn-edit-buku" class="btn" data-toggle="modal" data-target="#editBukuModal" data-id="{{ $book->id }}"><i class="fa fa-edit"></i></button>
-                                        <button type="button" id="btn-delete-buku" class="btn" data-toggle="modal" data-target="#deleteBukuModal" data-id="{{ $book->id }}" data-cover="{{ $book->cover }}"><i class="fa fa-trash"></i></button>
+                                        <button type="button" id="btn-delete-buku" class="btn" data-toggle="modal" data-target="#deleteBukuModal" data-id="{{ $book->id }}" data-cover="{{ $book->cover }}" data-judul="{{$book->judul}}"><i class="fa fa-trash"></i></button>
                                     </div>
                                 </td>
                             </tr>
@@ -169,7 +169,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Apakah anda yakin akan menghapus data <strong class="font-italic">{{$book->judul}}</strong>?
+                Apakah anda yakin akan menghapus data <strong class="font-italic" id="delete-judul"></strong>?
                 <form method="post" action="{{ route('admin.book.delete') }}" enctype="multipart/form-data">
                     @csrf
                     @method('DELETE')
@@ -225,9 +225,11 @@
         });
         $(document).on('click', '#btn-delete-buku', function() {
             let id = $(this).data('id');
+            let judul = $(this).data('judul');
             let cover = $(this).data('cover');
             $('#delete-id').val(id);
             $('#delete-old-cover').val(cover);
+            $('#delete-judul').text(judul);
             console.log("hallo");
         });
 
@@ -235,6 +237,7 @@
 
         $(document).on('click', '#btn-edit-buku', function() {
             let id = $(this).data('id');
+
 
             $('#image-area').empty();
 

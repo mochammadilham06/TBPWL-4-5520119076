@@ -59,7 +59,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Brands</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kategori</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -137,7 +137,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Apakah anda yakin akan menghapus data <strong class="font-italic" id="delete-nama"></strong>?
+                Apakah anda yakin akan menghapus data Kategori <strong class="font-italic" id="delete-nama"></strong>?
                 <form method="post" action="{{ route('admin.kategori.delete') }}" enctype="multipart/form-data">
                     @csrf
                     @method('DELETE')
