@@ -40,7 +40,7 @@
                                 <td>
                                     <div class="btn-group" roles="group" aria-label="Basic Example">
                                         <button type="button" id="btn-edit-categories" class="btn" data-toggle="modal" data-target="#modalEdit" data-id="{{ $key->id }}" data-name="{{ $key->name }}" data-description="{{ $key->description }}"><i class="fa fa-edit"></i></button>
-                                        <button type="button" id="btn-delete-categories" class="btn" data-toggle="modal" data-target="#modalDeleteData" data-id="{{ $key->id }}"><i class="fa fa-trash"></i></button>
+                                        <button type="button" id="btn-delete-categories" class="btn" data-toggle="modal" data-target="#modalDeleteData" data-id="{{ $key->id }}" data-name="{{$key->name}}"><i class="fa fa-trash"></i></button>
                                     </div>
                                 </td>
                             </tr>
