@@ -70,11 +70,11 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">Nama Brands</label>
-                        <input type="text" class="form-control" name="name" id="name" required />
+                        <input type="text" class="form-control" placeholder="Masukan nama Merek" name="name" id="name" required />
                     </div>
                     <div class="form-group">
                         <label for="description">Keterangan</label>
-                        <textarea class="form-control" aria-label="With textarea" name="description" id="description" required></textarea>
+                        <textarea class="form-control" aria-label="With textarea" placeholder="Masukan keterangan merek" name="description" id="description" required></textarea>
                     </div>
 
 

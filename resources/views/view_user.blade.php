@@ -76,26 +76,30 @@
             <div class="modal-body">
                 <form method="post" action="{{ route('admin.user.submit') }}" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
-                        <label for="name">Nama</label>
-                        <input type="text" class="form-control" name="name" id="name" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" name="username" id="username" required />
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="form-group .col-md-6 mr-5">
+                                <label for="name">Nama</label>
+                                <input type="text" placeholder="Masukan Nama" class="form-control" name="name" id="name" required />
+                            </div>
+                            <div class="form-group .col-md-6 .ml-auto">
+                                <label for="username">Username</label>
+                                <input type="text" placeholder="Masukan username" class="form-control" name="username" id="username" required />
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" name="email" id="email" required />
+                        <input type="text" class="form-control" placeholder="Masukan Email" name="email" id="email" required />
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input min="1" type="password" class="form-control" name="password" id="password" required />
+                        <input min="1" type="password" class="form-control" placeholder="Masukan password" name="password" id="password" required />
                     </div>
                     <div class="form-group">
                         <label for="roles_id">Role</label>
                         <div class="input-group">
-                            <select class="custom-select" name="roles_id" id="roles_id" aria-label="Example select with button addon">
+                            <select class="custom-select" name="roles_id" placeholder="Masukan role anda" id="roles_id" aria-label="Example select with button addon">
                                 <option selected>Pilih...</option>
                                 <option value="1">Admin</option>
                                 <option value="2">User</option>
@@ -116,7 +120,7 @@
                     </div>
                     <div class="form-group">
                         <label for="photo">Foto</label>
-                        <input type="file" class="form-control" name="photo" id="photo" />
+                        <input type="file" class="form-control" placeholder="Masukan foto" name="photo" id="photo" />
                     </div>
 
             </div>
