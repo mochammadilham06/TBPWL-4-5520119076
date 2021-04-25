@@ -232,7 +232,7 @@ return [
         [
             'text'        => 'Dashboard',
             'url'         => 'admin/home',
-            'icon'        => 'fas fa-fw fa-home',
+            'icon'        => 'fas fa-tachometer-alt',
             'can' => 'isAdmin',
         ],
         [

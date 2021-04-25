@@ -1,11 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BrandsController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoriesController;
+use GuzzleHttp\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +28,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Admin Route
@@ -70,11 +75,36 @@ Route::post('admin/books/import', [BookController::class, 'import'])
     ->middleware('is_admin');
 
 
+//Route User
+Route::get('admin/user', [ProfileController::class, 'index'])
+    ->name('admin.user')
+    ->Middleware('is_admin');
+
+Route::post('admin/user', [ProfileController::class, 'add_user'])
+    ->name('admin.user.submit')
+    ->middleware('is_admin');
+
+
+
+
 
 
 //Route Categories
-Route::get('admin/kategori', [App\Http\Controllers\CategoriesController::class, 'index'])
+Route::get('admin/kategori', [CategoriesController::class, 'index'])
     ->name('admin.kategori')
+    ->middleware('is_admin');
+Route::post('admin/kategori', [CategoriesController::class, 'add_categories'])
+    ->name('admin.kategori.submit')
+    ->middleware('is_admin');
+//route edit categories
+Route::patch('admin/kategori/update', [CategoriesController::class, 'update_categories'])
+    ->name('admin.kategori.update')
+    ->middleware('is_admin');
+Route::get('admin/ajaxadmin/dataCategories/{id}', [CategoriesController::class, 'getDataCategories']);
+
+//route delete categories
+Route::delete('admin/kategori/delete', [CategoriesController::class, 'delete_categories'])
+    ->name('admin.kategori.delete')
     ->middleware('is_admin');
 
 
@@ -102,5 +132,9 @@ Route::delete('admin/merek/delete', [BrandsController::class, 'delete_brands'])
 
 //Route Product
 Route::get('admin/kelola_barang', [App\Http\Controllers\ProductController::class, 'index'])
-    ->name('admin.barang')
+    ->name('admin.product')
+    ->middleware('is_admin');
+
+Route::post('admin/kelola_barang', [ProductController::class, 'add_product'])
+    ->name('admin.product.submit')
     ->middleware('is_admin');

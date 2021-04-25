@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+
 class CreateUsersSeeder extends Seeder
 {
     /**
@@ -15,7 +16,7 @@ class CreateUsersSeeder extends Seeder
     {
         $user = [
             [
-                'name' => 'isUser',
+                'name' => 'User',
                 'username' => 'isUser',
                 'email' => 'user@gmail.com',
                 'password' => bcrypt('123456'),
@@ -23,7 +24,7 @@ class CreateUsersSeeder extends Seeder
                 'roles_id' => 2
             ],
             [
-                'name' => 'isAdmin',
+                'name' => 'Admin',
                 'username' => 'isAdmin',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('123456'),
@@ -31,7 +32,7 @@ class CreateUsersSeeder extends Seeder
                 'roles_id' => 1
             ]
         ];
-        foreach ($user as $key => $value){
+        foreach ($user as $key => $value) {
             User::create($value);
         }
     }
