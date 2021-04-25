@@ -78,13 +78,17 @@
       <div class="modal-body col-md-12">
         <form method="post" action="{{ route('admin.product.submit') }}" enctype="multipart/form-data">
           @csrf
-          <div class="form-group">
-            <label for="judul">Nama</label>
-            <input type="text" class="form-control" name="judul" id="judul" required />
-          </div>
-          <div class="form-group">
-            <label for="penulis">Jumlah</label>
-            <input type="number" class="form-control" name="penulis" id="penulis" required />
+          <div class="container-fluid">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="judul">Nama</label>
+                <input type="text" placeholder="Masukan Nama Barang" class="form-control" name="judul" id="judul" required />
+              </div>
+              <div class="form-group col-md-6 ml-auto">
+                <label for="penulis">Jumlah</label>
+                <input type="number" min="0" class="form-control" placeholder="Masukan Jumlah" name="penulis" id="penulis" required />
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label for="tahun">Harga</label>
@@ -92,7 +96,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">Rp.</span>
               </div>
-              <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+              <input type="number" min="0" placeholder="Masukan Harga" class="form-control" aria-label="Amount (to the nearest dollar)">
 
             </div>
           </div>
@@ -100,8 +104,8 @@
             <label for="penerbit">Kategori</label>
             <!-- <input type="text" class="form-control" name="penerbit" id="penerbit" required /> -->
             <div class="input-group">
-              <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                <option selected>Pilih...</option>
+              <select class="custom-select" placeholder="Masukan Kategori barang" id="inputGroupSelect04" aria-label="Example select with button addon">
+                <option selected>Pilih Kategori</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
               </select>
@@ -112,8 +116,8 @@
             <label for="penerbit">Merek</label>
             <!-- <input type="text" class="form-control" name="penerbit" id="penerbit" required /> -->
             <div class="input-group">
-              <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                <option selected>Pilih...</option>
+              <select class="custom-select" placeholder="Masukan Nama Brands" id="inputGroupSelect04" aria-label="Example select with button addon">
+                <option selected>Pilih Merek</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
               </select>
@@ -122,7 +126,7 @@
           </div>
           <div class="form-group">
             <label for="cover">Photo Barang</label>
-            <input type="file" class="form-control" name="cover" id="cover" />
+            <input type="file" class="form-control" placeholder="Masukan Photo barang" name="cover" id="cover" />
           </div>
 
       </div>
