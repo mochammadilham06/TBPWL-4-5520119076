@@ -84,7 +84,7 @@
           </div>
           <div class="form-group">
             <label for="penulis">Jumlah</label>
-            <input type="text" class="form-control" name="penulis" id="penulis" required />
+            <input type="number" class="form-control" name="penulis" id="penulis" required />
           </div>
           <div class="form-group">
             <label for="tahun">Harga</label>
@@ -100,30 +100,24 @@
             <label for="penerbit">Kategori</label>
             <!-- <input type="text" class="form-control" name="penerbit" id="penerbit" required /> -->
             <div class="input-group">
-              <input type="text" class="form-control" aria-label="Text input with dropdown button">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
+              <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                <option selected>Pilih...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+              </select>
 
-                </div>
-              </div>
             </div>
           </div>
           <div class="form-group">
             <label for="penerbit">Merek</label>
             <!-- <input type="text" class="form-control" name="penerbit" id="penerbit" required /> -->
             <div class="input-group">
-              <input type="text" class="form-control" aria-label="Text input with dropdown button">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
+              <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                <option selected>Pilih...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+              </select>
 
-                </div>
-              </div>
             </div>
           </div>
           <div class="form-group">

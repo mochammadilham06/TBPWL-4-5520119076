@@ -95,6 +95,14 @@
                     <div class="form-group">
                         <label for="roles_id">Role</label>
                         <div class="input-group">
+                            <select class="custom-select" name="roles_id" id="roles_id" aria-label="Example select with button addon">
+                                <option selected>Pilih...</option>
+                                <option value="1">Admin</option>
+                                <option value="2">User</option>
+                            </select>
+
+                        </div>
+                        <!-- <div class="input-group">
                             <input type="text" name="roles_id" id="roles_id" class="form-control" aria-label="Text input with dropdown button">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih</button>
@@ -104,7 +112,7 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="form-group">
                         <label for="photo">Foto</label>
@@ -157,6 +165,14 @@
                             <div class="form-group">
                                 <label for="roles_id">Role</label>
                                 <div class="input-group">
+                                    <select class="custom-select" name="roles_id" id="edit-roles_id" aria-label="Example select with button addon">
+                                        <option selected>Pilih...</option>
+                                        <option value="1">Admin</option>
+                                        <option value="2">User</option>
+                                    </select>
+
+                                </div>
+                                <!-- <div class="input-group">
                                     <input type="text" name="roles_id" id="edit-roles_id" class="form-control" aria-label="Text input with dropdown button">
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih</button>
@@ -165,7 +181,7 @@
                                             <a class="dropdown-item" href="#roles_id" aria-valuetext="User">User</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="col-md-6">
