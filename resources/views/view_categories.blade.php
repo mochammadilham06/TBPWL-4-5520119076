@@ -69,7 +69,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">Categories Name</label>
-                        <input type="text" class="form-control" placeholder="Input Categories name=" name" id="name" required />
+                        <input type="text" class="form-control" placeholder="Input Categories name" name="name" id="name" required />
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>

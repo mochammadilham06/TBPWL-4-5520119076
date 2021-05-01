@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use PDF;
 
 use function GuzzleHttp\Promise\all;
 
@@ -17,6 +18,7 @@ class ProductController extends Controller
         $barang = Product::all();
         return view('view_product', compact('user', 'barang'));
     }
+  
 
     public function add_product(Request $req)
     {
@@ -104,5 +106,19 @@ class ProductController extends Controller
         );
 
         return redirect()->route('admin.product')->with($notification);
+    }
+
+    public function laporan_masuk()
+    {
+        $user = Auth::user();
+        $barang = Product::all();
+        return view('view_laporan_masuk', compact('user', 'barang'));
+    }
+
+    public function print_produk(){
+        $barang = Product::all();
+
+        $pdf = PDF::loadview('print_produk', ['barang'=>$barang]);
+        return $pdf->download('data_barang_masuk.pdf');
     }
 }

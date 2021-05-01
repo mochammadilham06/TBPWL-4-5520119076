@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoriesController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\TransaksiController;
+use App\Models\Transaksi;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,9 +144,14 @@ Route::delete('admin/merek/delete', [BrandsController::class, 'delete_brands'])
 
 
 //ROUTE PRODUCT
-Route::get('admin/kelola_barang', [App\Http\Controllers\ProductController::class, 'index'])
+Route::get('admin/kelola_barang', [ProductController::class, 'index'])
     ->name('admin.product')
     ->middleware('is_admin');
+
+Route::get('admin/laporan_masuk', [ProductController::class, 'laporan_masuk'])
+->name('admin.laporan')
+->middleware('is_admin');
+
 //tambah data
 Route::post('admin/kelola_barang', [ProductController::class, 'add_product'])
     ->name('admin.product.submit')
@@ -162,8 +168,37 @@ Route::delete('admin/kelola_barang/delete',[ProductController::class, 'destroy']
 ->name('admin.product.delete')
 ->middleware('is_admin');
 
+//print pdf barang masuk
+Route::get('admin/laporan_masuk/print_produk', [ProductController::class, 'print_produk'])
+    ->name('admin.print.produk')
+    ->middleware('is_admin');
+
 
 //ROUTE TRANSAKSI
 Route::get('admin/transaksi', [TransaksiController::class, 'index'])
 ->name('admin.transaksi')
+->middleware('is_admin');
+
+Route::get('admin/laporan_keluar', [TransaksiController::class, 'laporan_keluar'])
+->name('admin.laporan')
+->middleware('is_admin');
+
+//tambah data
+Route::post('admin/transaksi',[TransaksiController::class, 'add_transaction'])
+->name('admin.transaksi.submit')
+->middleware('is_admin');
+
+//edit data
+Route::patch('admin/transaksi/update',[TransaksiController::class, 'update_transaction'])
+->name('admin.transaksi.update')
+->middleware('is_admin');
+Route::get('admin/ajaxadmin/dataTransaksi/{id}',[TransaksiController::class, 'getDataTransaksi']);
+
+//delete data
+Route::delete('admin/transaksi/delete', [TransaksiController::class, 'destroy'])
+->name('admin.transaksi.delete')
+->middleware('is_admin');
+
+Route::get('admin/laporan_keluar/print_produk', [TransaksiController::class, 'print_produk'])
+->name('admin.print.transaksi')
 ->middleware('is_admin');

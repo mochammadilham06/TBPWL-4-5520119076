@@ -21,7 +21,14 @@ class CreateTransaksisTable extends Migration
             $table->bigInteger('harga');
             $table->string('pembeli', 100);
             $table->char('stok');
+            $table->bigInteger('total');
             $table->timestamps();
+
+
+            $table->foreign('harga')
+            ->references('harga')
+            ->on('products')
+            ->onUpdate('cascade');
         });
          
     }
