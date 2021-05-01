@@ -19,6 +19,7 @@ class CreateTransaksisTable extends Migration
             $table->foreignId('brands_id')->references('id')->on('brands')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('categories_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('harga');
+            $table->string('pembeli', 100);
             $table->char('stok');
             $table->timestamps();
         });

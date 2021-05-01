@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Pengaturan Profile')
+@section('title', 'Profile Page')
 
 @section('content_header')
     <h1>Pengaturan Profile</h1>
@@ -25,8 +25,7 @@
         <b>Version</b> 1.0.0
     </div>
     <strong>CopyRight &copy; {{date('Y')}}
-    <a href="http://ft.unsur.ac.id/" target="_blank">Fakultas Teknik,
-    Universitas Suryakancana</a>.</strong> All Right reserved
+    <a href="http://ft.unsur.ac.id/" target="_blank">Mochammad Ilham Maulana</a>.</strong> All Right reserved
 @stop
 
 @section('css')
