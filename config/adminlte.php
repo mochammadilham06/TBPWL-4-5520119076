@@ -46,7 +46,7 @@ return [
     */
 
     'logo' => '<b>Fedor</b> STORAGE',
-    'logo_img' => 'vendor/adminlte/dist/img/logo.jpg',
+    'logo_img' => 'vendor/adminlte/dist/img/logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -248,6 +248,12 @@ return [
             'can' => 'isAdmin',
         ],
         [
+            'text'        => 'Transaksi',
+            'url'         => 'admin/transaksi',
+            'icon'        => 'fas fa-hand-holding-usd',
+            'can' => 'isAdmin',
+        ],
+        [
             'text'        => 'Kategori Barang',
             'url'         => 'admin/kategori',
             'icon'        => 'fas fa-fw fa-folder-open',
@@ -259,6 +265,7 @@ return [
             'icon'        => 'fab fa-fw fa-apple',
             'can' => 'isAdmin',
         ],
+        
         [
             'text'    => 'Laporan',
             'icon'    => 'fas fa-file-archive',
@@ -283,17 +290,17 @@ return [
             'icon'        => 'fas fa-fw fa-book',
             'can'         => 'isAdmin',
         ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'profile',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'profile',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
+        // ['header' => 'account_settings'],
+        // [
+        //     'text' => 'profile',
+        //     'url'  => 'profile',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
+        // [
+        //     'text' => 'change_password',
+        //     'url'  => 'profile',
+        //     'icon' => 'fas fa-fw fa-lock',
+        // ],
         // [
         //     'text'    => 'multilevel',
         //     'icon'    => 'fas fa-fw fa-share',

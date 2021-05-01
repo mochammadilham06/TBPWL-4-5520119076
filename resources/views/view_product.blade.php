@@ -25,12 +25,12 @@
             <thead>
               <tr>
                 <th>NO</th>
-                <th>FOTO</th>
-                <th>NAMA</th>
-                <th>KATEGORI</th>
-                <th>MEREK</th>
-                <th>HARGA</th>
-                <th>STOK</th>
+                <th>PICTURE</th>
+                <th>NAME</th>
+                <th>CATEGORIES</th>
+                <th>BRANDS</th>
+                <th>PRICE</th>
+                <th>STOCK</th>
                 <th>ACTION</th>
               </tr>
             </thead>
@@ -47,14 +47,14 @@
                   @endif
                 </td>
                 <td>{{$key->name}}</td>
-                <td>{{$key->categories_id}}</td>
-                <td>{{$key->brands_id}}</td>
+                <td>{{$key->view_kategori->name}}</td>
+                <td>{{$key->view_merek->name}}</td>
                 <td>{{$key->harga}}</td>
                 <td>{{$key->stok}}</td>
                 <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" id="btn-edit-buku" class="btn" data-toggle="modal" data-target="#editBukuModal" data-id="{{ $key->id }}"><i class="fa fa-edit"></i></button>
-                    <button type="button" id="btn-delete-buku" class="btn" data-toggle="modal" data-target="#deleteBukuModal" data-id="{{ $key->id }}" data-photo="{{ $key->photo }}"><i class="fa fa-trash"></i></button>
+                    <button type="button" id="btn-edit-data" class="btn" data-toggle="modal" data-target="#editData" data-id="{{ $key->id }}" data-stok="{{$key->stok}}" data-categories_id="{{$key->view_kategori->name}}" data-brands_id="{{$key->view_merek->name}}"><i class="fa fa-edit"></i></button>
+                    <button type="button" id="btn-delete-data" class="btn" data-toggle="modal" data-target="#deleteData" data-id="{{ $key->id }}" data-photo="{{ $key->photo }}" data-name="{{$key->name}}"><i class="fa fa-trash"></i></button>
                   </div>
                 </td>
               </tr>
@@ -66,11 +66,13 @@
     </div>
   </div>
 </div>
+
+<!-- Modal Tambah Data -->
 <div class="modal fade" id="tambahData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Barang</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Input Product</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -81,52 +83,58 @@
           <div class="container-fluid">
             <div class="row">
               <div class="form-group col-md-6">
-                <label for="judul">Nama</label>
-                <input type="text" placeholder="Masukan Nama Barang" class="form-control" name="judul" id="judul" required />
+                <label for="name">Name</label>
+                <input type="text" placeholder="Input name of product" class="form-control" name="name" id="name" required />
               </div>
               <div class="form-group col-md-6 ml-auto">
-                <label for="penulis">Jumlah</label>
-                <input type="number" min="0" class="form-control" placeholder="Masukan Jumlah" name="penulis" id="penulis" required />
+                <label for="stok">Amount</label>
+                <input type="number" min="0" class="form-control" placeholder="Input Stock" name="stok" id="stok" required />
               </div>
             </div>
           </div>
           <div class="form-group">
-            <label for="tahun">Harga</label>
+            <label for="tahun">Price</label>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text">Rp.</span>
               </div>
-              <input type="number" min="0" placeholder="Masukan Harga" class="form-control" aria-label="Amount (to the nearest dollar)">
+              <input type="number" name="harga" id="harga" min="0" placeholder="Input Price" class="form-control" aria-label="Amount (to the nearest dollar)">
 
             </div>
           </div>
           <div class="form-group">
-            <label for="penerbit">Kategori</label>
-            <!-- <input type="text" class="form-control" name="penerbit" id="penerbit" required /> -->
+            <label for="penerbit">Categories</label>
             <div class="input-group">
-              <select class="custom-select" placeholder="Masukan Kategori barang" id="inputGroupSelect04" aria-label="Example select with button addon">
-                <option selected>Pilih Kategori</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
+              <select class="custom-select" name="categories_id" id="categories_id" placeholder="Input Categories" aria-label="Example select with button addon">
+                <option selected>Choose here....</option>
+                @php
+                $data=App\Models\Categories::get();
+                @endphp
+                @foreach($data as $key)
+                <option value="{{$key->id}}">{{$key->name}}</option>
+                @endforeach
               </select>
 
             </div>
           </div>
           <div class="form-group">
-            <label for="penerbit">Merek</label>
-            <!-- <input type="text" class="form-control" name="penerbit" id="penerbit" required /> -->
+            <label for="penerbit">Brands</label>
             <div class="input-group">
-              <select class="custom-select" placeholder="Masukan Nama Brands" id="inputGroupSelect04" aria-label="Example select with button addon">
-                <option selected>Pilih Merek</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
+              <select class="custom-select" name="brands_id" id="brands_id" placeholder="Input Brands" aria-label="Example select with button addon">
+                <option selected>Choose here....</option>
+                @php
+                $data=App\Models\Brands::get();
+                @endphp
+                @foreach($data as $key)
+                <option value="{{$key->id}}">{{$key->name}}</option>
+                @endforeach
               </select>
 
             </div>
           </div>
           <div class="form-group">
-            <label for="cover">Photo Barang</label>
-            <input type="file" class="form-control" placeholder="Masukan Photo barang" name="cover" id="cover" />
+            <label for="photo">Picture</label>
+            <input type="file" class="form-control" placeholder="Input the picture" name="photo" id="photo" />
           </div>
 
       </div>
@@ -138,51 +146,84 @@
     </div>
   </div>
 </div>
+<!-- Modal Tambah Data -->
 
-<div class="modal fade" id="editBukuModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<!-- Modal Edit Data -->
+<div class="modal fade" id="editData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Book</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Data Product</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form method="post" action="{{ route('admin.book.update') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('admin.product.update') }}" enctype="multipart/form-data">
           @csrf
           @method('PATCH')
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="edit-judul">Title</label>
-                <input type="text" class="form-control" name="judul" id="edit-judul" required />
+                <label for="edit-name">Name</label>
+                <input type="text" class="form-control" name="name" id="edit-name" required />
               </div>
               <div class="form-group">
-                <label for="edit-penulis">Author</label>
-                <input type="text" class="form-control" name="penulis" id="edit-penulis" required />
+                <label for="edit-jumlah">Amount</label>
+                <input type="number" class="form-control" name="stok" id="edit-jumlah" required />
               </div>
               <div class="form-group">
-                <label for="edit-tahun">Year</label>
-                <input min="1" type="number" id="datepicker" class="form-control" name="tahun" id="edit-tahun" required />
+                <label for="edit-harga">Price</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Rp.</span>
+                  </div>
+                  <input type="number" name="harga" id="edit-harga" min="0" class="form-control" aria-label="Amount (to the nearest dollar)">
+
+                </div>
               </div>
               <div class="form-group">
-                <label for="edit-penerbit">Publisher</label>
-                <input type="text" class="form-control" name="penerbit" id="edit-penerbit" required />
+                <label for="edit-kategori">Categories</label>
+                <div class="input-group">
+                  <select class="custom-select" name="categories_id" id="edit-kategori" aria-label="Example select with button addon" required>
+                    @php
+                    $data=App\Models\Categories::get();
+                    @endphp
+                    @foreach($data as $key)
+                    <option value="{{$key->id}}">{{$key->name}}</option>
+                    @endforeach
+                  </select>
+
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="edit-merek">Brands</label>
+                <div class="input-group">
+                  <select class="custom-select" name="brands_id" id="edit-merek" aria-label="Example select with button addon" required>
+                    @php
+                    $data=App\Models\Brands::get();
+                    @endphp
+                    @foreach($data as $key)
+                    <option value="{{$key->id}}">{{$key->name}}</option>
+                    @endforeach
+                  </select>
+
+                </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group" id="image-area"></div>
               <div class="form-group">
-                <label for="edit-cover">Cover</label>
-                <input type="file" class="form-control" name="cover" id="edit-cover" />
+                <label for="edit-photo">Picture</label>
+                <input type="file" class="form-control" name="photo" id="edit-photo" />
               </div>
             </div>
           </div>
       </div>
       <div class="modal-footer">
         <input type="hidden" name="id" id="edit-id" />
-        <input type="hidden" name="old_cover" id="edit-old-cover" />
+        <input type="hidden" name="old_photo" id="edit-old-photo" />
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-success">Update</button>
         </form>
@@ -190,26 +231,27 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="deleteBukuModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Edit Data -->
+<div class="modal fade" id="deleteData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Hapus Data Buku</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Apakah anda yakin akan menghapus data <strong class="font-italic"></strong>?
-        <form method="post" action="{{ route('admin.book.delete') }}" enctype="multipart/form-data">
+        Are you sure want to delete this data <strong class="font-italic" id="delete-name"></strong>?
+        <form method="post" action="{{ route('admin.product.delete') }}" enctype="multipart/form-data">
           @csrf
           @method('DELETE')
       </div>
       <div class="modal-footer">
         <input type="hidden" name="id" id="delete-id" value="" />
-        <input type="hidden" name="old_cover" id="delete-old-cover" />
+        <input type="hidden" name="old_photo" id="delete-old-photo" />
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-danger">Hapus</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
         </form>
       </div>
     </div>
@@ -224,41 +266,41 @@
 @section('js')
 <script>
   $(function() {
-    $("#datepicker").datepicker({
-      format: "yyyy", // Notice the Extra space at the beginning
-      viewMode: "years",
-      minViewMode: "years"
-    });
-    $(document).on('click', '#btn-delete-buku', function() {
+
+    $(document).on('click', '#btn-delete-data', function() {
       let id = $(this).data('id');
-      let cover = $(this).data('cover');
+      let photo = $(this).data('photo');
+      let name = $(this).data('name');
       $('#delete-id').val(id);
-      $('#delete-old-cover').val(cover);
+      $('#delete-old-photo').val(photo);
+      $('#delete-name').text(name);
       console.log("hallo");
     });
 
 
 
-    $(document).on('click', '#btn-edit-buku', function() {
+    $(document).on('click', '#btn-edit-data', function() {
       let id = $(this).data('id');
 
       $('#image-area').empty();
 
+
       $.ajax({
         type: "get",
-        url: baseurl + '/admin/ajaxadmin/dataBuku/' + id,
+        url: baseurl + '/admin/ajaxadmin/dataProduct/' + id,
         dataType: 'json',
         success: function(res) {
-          $('#edit-judul').val(res.judul);
-          $('#edit-penerbit').val(res.penerbit);
-          $('#edit-penulis').val(res.penulis);
-          $('#edit-tahun').val(res.tahun);
           $('#edit-id').val(res.id);
-          $('#edit-old-cover').val(res.cover);
+          $('#edit-name').val(res.name);
+          $('#edit-jumlah').val(res.stok);
+          $('#edit-harga').val(res.harga);
+          $('#edit-kategori').val(res.categories_id);
+          $('#edit-merek').val(res.brands_id);
+          $('#edit-old-photo').val(res.photo);
 
-          if (res.cover !== null) {
+          if (res.photo !== null) {
             $('#image-area').append(
-              "<img src='" + baseurl + "/storage/cover_buku/" + res.cover + "' width='200px'/>"
+              "<img src='" + baseurl + "/storage/photo_barang/" + res.photo + "' width='200px'/>"
             );
           } else {
             $('#image-area').append('[Gambar tidak tersedia]');

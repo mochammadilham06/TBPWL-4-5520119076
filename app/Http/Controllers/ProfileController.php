@@ -45,7 +45,7 @@ class ProfileController extends Controller
         $users->save();
 
         $notification = array(
-            'message' => 'Tambah Data Berhasil',
+            'message' => 'Data Added Successfully',
             'alert-type' => 'success'
         );
 
@@ -80,7 +80,7 @@ class ProfileController extends Controller
         $users->save();
 
         $notification = array(
-            'message' => 'Edit Data Berhasil',
+            'message' => 'Data Successfully Updated',
             'alert-type' => 'success'
         );
 
@@ -100,7 +100,7 @@ class ProfileController extends Controller
         $users->delete();
 
         $notification = array(
-            'message' => 'Hapus Data user berhasil',
+            'message' => 'Data Successfully Deleted',
             'alert-type' => 'success'
         );
 

@@ -25,8 +25,8 @@
                         <thead>
                             <tr>
                                 <th>NO</th>
-                                <th>NAMA BRAND</th>
-                                <th>KETERANGAN</th>
+                                <th>BRANDS</th>
+                                <th>DESCRIPTION</th>
                                 <th>ACTION</th>
 
                             </tr>
@@ -60,7 +60,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Brands</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Input Brands</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -69,20 +69,20 @@
                 <form method="post" action="{{ route('admin.brand.submit') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Nama Brands</label>
-                        <input type="text" class="form-control" placeholder="Masukan nama Merek" name="name" id="name" required />
+                        <label for="name">Brands Name</label>
+                        <input type="text" class="form-control" placeholder="Input Brands Name" name="name" id="name" required />
                     </div>
                     <div class="form-group">
-                        <label for="description">Keterangan</label>
-                        <textarea class="form-control" aria-label="With textarea" placeholder="Masukan keterangan merek" name="description" id="description" required></textarea>
+                        <label for="description">Description</label>
+                        <textarea class="form-control" aria-label="With textarea" placeholder="Input Description" name="description" id="description" required></textarea>
                     </div>
 
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Tambah Data</button>
-                </form>
+                <button type="submit" class="btn btn-primary">Add/button>
+                    </form>
             </div>
         </div>
     </div>
@@ -95,7 +95,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Data Brands</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Brands</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -107,11 +107,11 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                <label for="edit-name">NAMA BRAND</label>
+                                <label for="edit-name">Brands Name</label>
                                 <input type="text" class="form-control" name="name" id="edit-name" required />
                             </div>
                             <div class="form-group">
-                                <label for="edit-description">KETERANGAN</label>
+                                <label for="edit-description">Description</label>
                                 <textarea class="form-control" aria-label="With textarea" name="description" id="edit-description" required></textarea>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                 <input type="hidden" name="id" id="edit-id" />
 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success">Update Data</button>
+                <button type="submit" class="btn btn-success">Update</button>
                 </form>
             </div>
         </div>
@@ -135,13 +135,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hapus Data Brands</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Apakah anda yakin ingin menghapus Data Brand <strong class="" id="delete-nama"></strong>?
+                Are you sure want to delete this data <strong class="" id="delete-nama"></strong>?
                 <form method="post" action="{{ route('admin.brand.delete') }}" enctype="multipart/form-data">
                     @csrf
                     @method('DELETE')
@@ -149,7 +149,7 @@
             <div class="modal-footer">
                 <input type="hidden" name="id" id="delete-id" value="" />
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger">Hapus</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </div>
         </div>
@@ -187,6 +187,7 @@
                 dataType: 'json',
                 success: function(res) {
                     console.log(res);
+                    $('#edit-id').val(res.id);
                     $('#edit-name').val(res.name);
                     $('#edit-description').val(res.description);
                     $('#edit-id').val(res.id);

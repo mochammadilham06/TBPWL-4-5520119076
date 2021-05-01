@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoriesController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -141,11 +142,28 @@ Route::delete('admin/merek/delete', [BrandsController::class, 'delete_brands'])
     ->middleware('is_admin');
 
 
-//Route Product
+//ROUTE PRODUCT
 Route::get('admin/kelola_barang', [App\Http\Controllers\ProductController::class, 'index'])
     ->name('admin.product')
     ->middleware('is_admin');
-
+//tambah data
 Route::post('admin/kelola_barang', [ProductController::class, 'add_product'])
     ->name('admin.product.submit')
     ->middleware('is_admin');
+
+//edit data
+Route::patch('admin/kelola_barang/update', [ProductController::class, 'edit_product'])
+    ->name('admin.product.update')
+    ->middleware('is_admin');
+Route::get('admin/ajaxadmin/dataProduct/{id}', [ProductController::class, 'getDataProduct']);
+
+//delete data
+Route::delete('admin/kelola_barang/delete',[ProductController::class, 'destroy'])
+->name('admin.product.delete')
+->middleware('is_admin');
+
+
+//ROUTE TRANSAKSI
+Route::get('admin/transaksi', [TransaksiController::class, 'index'])
+->name('admin.transaksi')
+->middleware('is_admin');

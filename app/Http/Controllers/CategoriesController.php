@@ -27,7 +27,7 @@ class CategoriesController extends Controller
         $kategori->save();
 
         $notification = array(
-            'message' => 'Tambah Kategori Sukses',
+            'message' => 'Data Added Successfully',
             'alert-type' => 'success'
         );
 
@@ -38,7 +38,7 @@ class CategoriesController extends Controller
     {
         $kategori = Categories::find($id);
 
-        return response()->jsonp($kategori);
+        return response()->json($kategori);
     }
 
     public function update_categories(Request $req)
@@ -52,7 +52,7 @@ class CategoriesController extends Controller
         $kategori->save();
 
         $notification = array(
-            'message' => 'Edit Data Kategori Sukses',
+            'message' => 'Data Successfully Updated',
             'alert-type' => 'success'
         );
 
@@ -66,7 +66,7 @@ class CategoriesController extends Controller
         $kategori->delete();
 
         $notification = array(
-            'message' => 'Hapus Data Kategori Sukses',
+            'message' => 'Data Successfully Deleted',
             'alert-type' => 'success'
         );
         return redirect()->route('admin.kategori')->with($notification);

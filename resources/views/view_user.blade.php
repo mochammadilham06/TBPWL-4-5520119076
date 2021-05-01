@@ -15,15 +15,15 @@
 
                 </div>
                 <div class="card-body">
-                    <button class="btn btn-primary float-left mr-3" data-toggle="modal" data-target="#modalTambahUser"><i class="fa fa-plus"></i> Tambah User</button>
+                    <button class="btn btn-primary float-left mr-3" data-toggle="modal" data-target="#modalTambahUser"><i class="fa fa-plus"></i> Add Data</button>
                     <div class="btn-group mb-5" role="group" aria-label="Basis Example">
                     </div>
                     <table id="table-data" class="table table-borderer display nowrap" style="width:100%">
                         <thead>
                             <tr>
                                 <th>NO</th>
-                                <th>FOTO</th>
-                                <th>NAMA</th>
+                                <th>PICTURE</th>
+                                <th>NAME</th>
                                 <th>EMAIL</th>
                                 <th>PASSWORD</th>
                                 <th>ROLES</th>
@@ -45,7 +45,7 @@
                                 <td>{{$pengguna->name}}</td>
                                 <td>{{$pengguna->email}}</td>
                                 <td>{{$pengguna->password}}</td>
-                                <td>{{$pengguna->roles_id}}</td>
+                                <td>{{$pengguna->view_data->name}}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <button type="button" id="btn-edit-user" class="btn" data-toggle="modal" data-target="#modalEdit" data-id="{{ $pengguna->id }}" data-photo="{{$pengguna->photo}}" data-name="{{$pengguna->name}}" data-username="{{$pengguna->username}}" data-email="{{$pengguna->email}}" data-password="{{$pengguna->password}}" data-roles_id="{{$pengguna->roles_id}}"><i class="fa fa-edit"></i></button>
@@ -68,7 +68,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data User</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Input User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -79,54 +79,43 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="form-group .col-md-6 mr-5">
-                                <label for="name">Nama</label>
-                                <input type="text" placeholder="Masukan Nama" class="form-control" name="name" id="name" required />
+                                <label for="name">Name</label>
+                                <input type="text" placeholder="Input Name" class="form-control" name="name" id="name" required />
                             </div>
                             <div class="form-group .col-md-6 .ml-auto">
                                 <label for="username">Username</label>
-                                <input type="text" placeholder="Masukan username" class="form-control" name="username" id="username" required />
+                                <input type="text" placeholder="Input Username" class="form-control" name="username" id="username" required />
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" placeholder="Masukan Email" name="email" id="email" required />
+                        <input type="text" class="form-control" placeholder="Input Email Address" name="email" id="email" required />
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input min="1" type="password" class="form-control" placeholder="Masukan password" name="password" id="password" required />
+                        <input min="1" type="password" class="form-control" placeholder="Input password" name="password" id="password" required />
                     </div>
                     <div class="form-group">
-                        <label for="roles_id">Role</label>
+                        <label for="roles_id">Roles</label>
                         <div class="input-group">
-                            <select class="custom-select" name="roles_id" placeholder="Masukan role anda" id="roles_id" aria-label="Example select with button addon">
-                                <option selected>Pilih...</option>
+                            <select class="custom-select" name="roles_id" placeholder="Input roles" id="roles_id" aria-label="Example select with button addon">
+                                <option selected>Choose Here...</option>
                                 <option value="1">Admin</option>
                                 <option value="2">User</option>
                             </select>
 
                         </div>
-                        <!-- <div class="input-group">
-                            <input type="text" name="roles_id" id="roles_id" class="form-control" aria-label="Text input with dropdown button">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih</button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#roles_id" aria-valuetext="Admin">Admin</a>
-                                    <a class="dropdown-item" href="#roles_id" aria-valuetext="User">User</a>
-
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="form-group">
-                        <label for="photo">Foto</label>
-                        <input type="file" class="form-control" placeholder="Masukan foto anda" name="photo" id="photo" />
+                        <label for="photo">Picture</label>
+                        <input type="file" class="form-control" placeholder="Input Picture" name="photo" id="photo" />
                     </div>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Tambah</button>
+                <button type="submit" class="btn btn-primary">Add</button>
                 </form>
             </div>
         </div>
@@ -151,7 +140,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Nama</label>
+                                <label for="name">Name</label>
                                 <input type="text" class="form-control" name="name" id="edit-name" required />
                             </div>
                             <div class="form-group">
@@ -167,31 +156,21 @@
                                 <input min="0" type="text" class="form-control" name="password" id="edit-password" required />
                             </div>
                             <div class="form-group">
-                                <label for="roles_id">Role</label>
-                                <div class="input-group">
-                                    <select class="custom-select" name="roles_id" id="edit-roles_id" aria-label="Example select with button addon">
-                                        <option selected>Pilih...</option>
-                                        <option value="1">Admin</option>
-                                        <option value="2">User</option>
-                                    </select>
+                                <label for="roles_id">Roles/label>
+                                    <div class="input-group">
+                                        <select class="custom-select" name="roles_id" id="edit-roles_id" aria-label="Example select with button addon">
+                                            <option selected>Choose Here...</option>
+                                            <option value="1">Admin</option>
+                                            <option value="2">User</option>
+                                        </select>
 
-                                </div>
-                                <!-- <div class="input-group">
-                                    <input type="text" name="roles_id" id="edit-roles_id" class="form-control" aria-label="Text input with dropdown button">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pilih</button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#roles_id" aria-valuetext="Admin">Admin</a>
-                                            <a class="dropdown-item" href="#roles_id" aria-valuetext="User">User</a>
-                                        </div>
                                     </div>
-                                </div> -->
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" id="image-area"></div>
                             <div class="form-group">
-                                <label for="edit-photo">photo</label>
+                                <label for="edit-photo">Picture</label>
                                 <input type="file" class="form-control" name="photo" id="edit-photo" />
                             </div>
                         </div>
@@ -214,13 +193,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hapus Data User</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Apakah anda yakin akan menghapus data <strong class="font-italic" id="delete-name"></strong>?
+                Are you sure want to delete this data <strong class="font-italic" id="delete-name"></strong>?
                 <form method="post" action="{{ route('admin.user.delete') }}" enctype="multipart/form-data">
                     @csrf
                     @method('DELETE')
@@ -229,7 +208,7 @@
                 <input type="hidden" name="id" id="delete-id" value="" />
                 <input type="hidden" name="old_photo" id="delete-old-photo" />
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger">Hapus</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </div>
         </div>

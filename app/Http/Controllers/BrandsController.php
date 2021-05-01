@@ -26,7 +26,7 @@ class BrandsController extends Controller
         $merek->save();
 
         $notification = array(
-            'message' => 'Data Brand Ditambahkan',
+            'message' => 'Data Added Successfully',
             'alert-type' => 'success'
         );
 
@@ -51,7 +51,7 @@ class BrandsController extends Controller
         $merek->save();
 
         $notification = array(
-            'message' => 'Data Brand Berhasil di Edit',
+            'message' => 'Data Successfully Updated',
             'alert-type' => 'success'
         );
 
@@ -64,7 +64,7 @@ class BrandsController extends Controller
 
         $merek->delete();
         $notification = array(
-            'message' => 'Data Brand Berhasil di Hapus',
+            'message' => 'Data Successfully Deleted',
             'alert-type' => 'success'
         );
 
