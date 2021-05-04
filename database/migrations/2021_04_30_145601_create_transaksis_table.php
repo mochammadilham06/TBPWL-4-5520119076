@@ -14,23 +14,17 @@ class CreateTransaksisTable extends Migration
     public function up()
     {
         Schema::create('transaksis', function (Blueprint $table) {
-            $table->id();
+            $table->id()->constrained();
             $table->string('name', 100);
-            $table->foreignId('brands_id')->references('id')->on('brands')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('categories_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('brands_id');
+            $table->foreignId('categories_id');
             $table->bigInteger('harga');
             $table->string('pembeli', 100);
             $table->char('stok');
             $table->bigInteger('total');
+            $table->foreignId('id_produk')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
-
-
-            $table->foreign('harga')
-            ->references('harga')
-            ->on('products')
-            ->onUpdate('cascade');
         });
-         
     }
 
     /**

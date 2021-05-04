@@ -151,7 +151,6 @@
         </div>
     </div>
 </div>
-
 <!-- Modal Hapus Data -->
 @stop
 
@@ -160,11 +159,6 @@
     $(function() {
         $(document).on('click', '#btn-edit-categories', function() {
             let id = $(this).data('id');
-            // let name = $(this).data('name');
-            // let description = $(this).data('description');
-            // $('#edit-name').val(name);
-            // $('#edit-description').val(description);
-            // $('#edit-id').val(id);
 
             $.ajax({
                 type: "get",
