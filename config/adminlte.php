@@ -284,12 +284,12 @@ return [
             ],
         ],
 
-        [
-            'text'        => 'Book',
-            'url'         => 'admin/books',
-            'icon'        => 'fas fa-fw fa-book',
-            'can'         => 'isAdmin',
-        ],
+        // [
+        //     'text'        => 'Book',
+        //     'url'         => 'admin/books',
+        //     'icon'        => 'fas fa-fw fa-book',
+        //     'can'         => 'isAdmin',
+        // ],
         // ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',

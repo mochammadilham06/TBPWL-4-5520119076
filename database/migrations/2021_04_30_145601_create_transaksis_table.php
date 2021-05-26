@@ -15,9 +15,6 @@ class CreateTransaksisTable extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id()->constrained();
-            $table->string('name', 100);
-            $table->foreignId('brands_id');
-            $table->foreignId('categories_id');
             $table->bigInteger('harga');
             $table->string('pembeli', 100);
             $table->char('stok');

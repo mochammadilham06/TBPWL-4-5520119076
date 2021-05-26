@@ -31,7 +31,7 @@
                 <th>PRICE</th>
                 <th>AMOUNT</th>
                 <th>TOTAL</th>
-                <th>ACTION</th>
+                <!-- <th>ACTION</th> -->
               </tr>
             </thead>
             <tbody>
@@ -39,20 +39,24 @@
               @foreach($trans as $key)
               <tr>
                 <td>{{$no++}}</td>
-                <td>{{$key->name}}</td>
+                <td>{{$key->view_product->name}}</td>
                 <td>
                   {{$key->pembeli}}
                 </td>
-                <td>{{$key->categories_id}}</td>
-                <td>{{$key->brands_id}}</td>
+                @php
+                $categories_id = App\Models\Categories::where('id', $key->view_product->categories_id)->first();
+                $brands_id = App\Models\Brands::where('id', $key->view_product->brands_id)->first();
+                @endphp
+                <td>{{$categories_id->name}}</td>
+                <td>{{$brands_id->name}}</td>
                 <td>{{$key->harga}}</td>
                 <td>{{$key->stok}}</td>
                 <td>{{$key->total}}</td>
                 <td>
-                  <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" id="btn-edit-data" class="btn" data-toggle="modal" data-target="#editData" data-id="{{ $key->id }}" data-stok="{{$key->stok}}" data-categories_id="{{$key->categories_id}}" data-brands_id="{{$key->brands_id}}"><i class="fa fa-edit"></i></button>
+                  <!-- <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" id="btn-edit-data" class="btn" data-toggle="modal" data-target="#editData" data-id="{{ $key->id }}" data-stok="{{$key->stok}}" data-categories_id="{{$key->categories_id}}" data-brands_id="{{$key->brands_id}}" data-id_produk="{{$key->view_product->name}}" data-categories_id="{{$categories_id->name}}" data-brands_id="{{$brands_id->name}}"><i class="fa fa-edit"></i></button>
                     <button type="button" id="btn-delete-data" class="btn" data-toggle="modal" data-target="#deleteData" data-id="{{ $key->id }}" data-photo="{{ $key->photo }}" data-name="{{$key->name}}"><i class="fa fa-trash"></i></button>
-                  </div>
+                  </div> -->
                 </td>
               </tr>
               @endforeach
@@ -80,8 +84,19 @@
           <div class="container-fluid">
             <div class="row">
               <div class="form-group col-md-6">
-                <label for="name">Name</label>
-                <input type="text" placeholder="Input name of product" class="form-control" name="name" id="name" required />
+                <label for="id_produk">Product</label>
+                <div class="input-group">
+                  <select class="custom-select" name="id_produk" id="id_produk" placeholder="Input Categories" aria-label="Example select with button addon">
+                    <option selected>Choose here....</option>
+                    @php
+                    $data=App\Models\Product::get();
+                    @endphp
+                    @foreach ($data as $key)
+                    <option value="{{$key->id}}">{{$key->name}}</option>
+                    @endforeach
+                  </select>
+
+                </div>
               </div>
               <div class="form-group col-md-6 ml-auto">
                 <label for="pembeli">Buyer</label>
@@ -92,12 +107,13 @@
           <div class="form-group">
             <label for="penerbit">Categories</label>
             <div class="input-group">
+
               <select class="custom-select" name="categories_id" id="categories_id" placeholder="Input Categories" aria-label="Example select with button addon">
                 <option selected>Choose here....</option>
                 @php
                 $data=App\Models\Categories::get();
                 @endphp
-                @foreach($data as $key)
+                @foreach ($data as $key)
                 <option value="{{$key->id}}">{{$key->name}}</option>
                 @endforeach
               </select>
@@ -107,12 +123,12 @@
           <div class="form-group">
             <label for="penerbit">Brands</label>
             <div class="input-group">
-              <select class="custom-select" name="brands_id" id="brands_id" placeholder="Input Brands" aria-label="Example select with button addon">
+              <select class="custom-select" readonly name="brands_id" id="brands_id" placeholder="Input Brands" aria-label="Example select with button addon">
                 <option selected>Choose here....</option>
                 @php
                 $data=App\Models\Brands::get();
                 @endphp
-                @foreach($data as $key)
+                @foreach ($data as $key)
                 <option value="{{$key->id}}">{{$key->name}}</option>
                 @endforeach
               </select>
@@ -122,7 +138,7 @@
           <div class="form-group">
             <label for="stok">Amount</label>
             <div class="input-group mb-3">
-              <input type="number" name="stok" id="stok" min="0" placeholder="Input purchase amount" class="form-control" aria-label="Amount (to the nearest dollar)">
+              <input type="number" readonly name="stok" id="stok" min="1" placeholder="Input purchase amount" class="form-control" aria-label="Amount (to the nearest dollar)">
 
             </div>
           </div>
@@ -132,11 +148,8 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">Rp.</span>
               </div>
-              @php
-              $data=App\Models\Product::get();
 
-              @endphp
-              <input type="number" name="harga" id="harga" min="0" placeholder="Input Price" class="form-control" aria-label="Amount (to the nearest dollar)">
+              <input type="number" name="harga" id="harga" min="0" placeholder="Input Price" class="form-control" readonly aria-label="Amount (to the nearest dollar)">
 
             </div>
           </div>
@@ -146,7 +159,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">Rp.</span>
               </div>
-              <input type="number" name="total" id="total" min="0" placeholder="Total" class="form-control" aria-label="Amount (to the nearest dollar)">
+              <input type="number" name="total" id="total" min="0" placeholder="Total" class="form-control" aria-label="Amount (to the nearest dollar)" readonly>
 
             </div>
           </div>
@@ -179,8 +192,8 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="edit-name">Name</label>
-                <input type="text" class="form-control" name="name" id="edit-name" required />
+                <label for="edit-produk">Name</label>
+                <input type="text" class="form-control" name="id_produk" id="edit-produk" required />
               </div>
               <div class="form-group">
                 <label for="edit-pembeli">Buyer</label>
@@ -210,7 +223,7 @@
               <div class="form-group">
                 <label for="edit-kategori">Categories</label>
                 <div class="input-group">
-                  <select class="custom-select" name="categories_id" id="edit-kategori" aria-label="Example select with button addon" required>
+                  <select class="custom-select" name="categories_id" id="edit-categories_id" aria-label="Example select with button addon" required>
                     @php
                     $data=App\Models\Categories::get();
                     @endphp
@@ -224,7 +237,7 @@
               <div class="form-group">
                 <label for="edit-merek">Brands</label>
                 <div class="input-group">
-                  <select class="custom-select" name="brands_id" id="edit-merek" aria-label="Example select with button addon" required>
+                  <select class="custom-select" name="brands_id" id="edit-brans_id" aria-label="Example select with button addon" required>
                     @php
                     $data=App\Models\Brands::get();
                     @endphp
@@ -298,19 +311,54 @@
         url: baseurl + '/admin/ajaxadmin/dataTransaksi/' + id,
         dataType: 'json',
         success: function(res) {
-          $('#edit-id').val(res.id);
-          $('#edit-name').val(res.name);
-          $('#edit-jumlah').val(res.stok);
-          $('#edit-harga').val(res.harga);
-          $('#edit-kategori').val(res.categories_id);
-          $('#edit-merek').val(res.brands_id);
-          $('#edit-pembeli').val(res.pembeli);
-          $('#edit-total').val(res.total);
+          $('#edit-id').val(res.data.id);
+          $('#edit-produk').val(res.prodak);
+          $('#edit-jumlah').val(res.data.stok);
+          $('#edit-harga').val(res.data.harga);
+          $('#edit-categories_id').val(res.categories_id);
+          $('#edit-brans_id').val(res.brands_id);
+          $('#edit-pembeli').val(res.data.pembeli);
+          $('#edit-total').val(res.data.total);
 
 
         },
       });
+
     });
+    $(document).on('change', '#id_produk', function() {
+      let id = $(this).val();
+      $('#stok').attr('readonly', false);
+      $.ajax({
+        type: "get",
+        url: baseurl + '/admin/ajaxadmin/ambilData/' + id,
+        dataType: 'json',
+        success: function(res) {
+          $('#categories_id').val(res.kategori_id);
+          $('#brands_id').val(res.brands_id);
+          $('#harga').val(res.prodak.harga);
+          $('#stok').val(1);
+          $('#total').val(res.prodak.harga);
+          $('#stok').attr('max', res.prodak.stok);
+
+        },
+      });
+    });
+
+    function autoCalc(qty) {
+      let harga = $('#harga').val();
+      let total = parseInt(harga) * parseInt(qty);
+
+      $('#total').val(total);
+
+    }
+    $(document).on('change keyup', '#stok', function(e) {
+      e.preventDefault();
+
+      autoCalc($(this).val())
+
+
+
+    })
 
   });
 </script>

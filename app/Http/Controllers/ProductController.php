@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use PDF;
 
+//excel
+use App\Exports\ProductExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ProductImport;
+
+
 use function GuzzleHttp\Promise\all;
 
 class ProductController extends Controller
@@ -18,7 +24,7 @@ class ProductController extends Controller
         $barang = Product::all();
         return view('view_product', compact('user', 'barang'));
     }
-  
+
 
     public function add_product(Request $req)
     {
@@ -41,9 +47,6 @@ class ProductController extends Controller
             );
 
             $barang->photo = $filename;
-
-
-            
         }
         $barang->save();
         $notification = array(
@@ -53,7 +56,8 @@ class ProductController extends Controller
         return redirect()->route('admin.product')->with($notification);
     }
 
-    public function edit_product(Request $req){
+    public function edit_product(Request $req)
+    {
         // dd($req->all());
         $barang = Product::find($req->get('id'));
 
@@ -94,7 +98,8 @@ class ProductController extends Controller
         return response()->json($barang);
     }
 
-    public function destroy(Request $req){
+    public function destroy(Request $req)
+    {
         $barang = Product::find($req->id);
 
         Storage::delete('public/photo_barang/' . $req->get('old_photo'));
@@ -115,10 +120,27 @@ class ProductController extends Controller
         return view('view_laporan_masuk', compact('user', 'barang'));
     }
 
-    public function print_produk(){
+    public function print_produk()
+    {
         $barang = Product::all();
 
-        $pdf = PDF::loadview('print_produk', ['barang'=>$barang]);
-        return $pdf->download('data_barang_masuk.pdf');
+        $pdf = PDF::loadview('print_produk_masuk', ['barang' => $barang]);
+        return $pdf->stream('data_barang_masuk.pdf');
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProductExport, 'barang_masuk.xlsx');
+    }
+    public function import(Request $req)
+    {
+        Excel::import(new ProductImport, $req->file('file'));
+
+        $notification = array(
+            'message' => 'Data Successfully Added',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.product')->with($notification);
     }
 }

@@ -149,8 +149,8 @@ Route::get('admin/kelola_barang', [ProductController::class, 'index'])
     ->middleware('is_admin');
 
 Route::get('admin/laporan_masuk', [ProductController::class, 'laporan_masuk'])
-->name('admin.laporan')
-->middleware('is_admin');
+    ->name('admin.laporan')
+    ->middleware('is_admin');
 
 //tambah data
 Route::post('admin/kelola_barang', [ProductController::class, 'add_product'])
@@ -164,41 +164,58 @@ Route::patch('admin/kelola_barang/update', [ProductController::class, 'edit_prod
 Route::get('admin/ajaxadmin/dataProduct/{id}', [ProductController::class, 'getDataProduct']);
 
 //delete data
-Route::delete('admin/kelola_barang/delete',[ProductController::class, 'destroy'])
-->name('admin.product.delete')
-->middleware('is_admin');
+Route::delete('admin/kelola_barang/delete', [ProductController::class, 'destroy'])
+    ->name('admin.product.delete')
+    ->middleware('is_admin');
 
 //print pdf barang masuk
 Route::get('admin/laporan_masuk/print_produk', [ProductController::class, 'print_produk'])
     ->name('admin.print.produk')
     ->middleware('is_admin');
 
+//export excel barang masuk
+Route::get('admin/laporan_masuk/export', [ProductController::class, 'export'])
+    ->name('admin.export.produk')
+    ->middleware('is_admin');
+//import excel barang masuk
+Route::post('admin/laporan_masuk/import', [ProductController::class, 'import'])
+    ->name('admin.import.produk')
+    ->middleware('is_admin');
+
+
+
 
 //ROUTE TRANSAKSI
 Route::get('admin/transaksi', [TransaksiController::class, 'index'])
-->name('admin.transaksi')
-->middleware('is_admin');
+    ->name('admin.transaksi')
+    ->middleware('is_admin');
 
 Route::get('admin/laporan_keluar', [TransaksiController::class, 'laporan_keluar'])
-->name('admin.laporan')
-->middleware('is_admin');
+    ->name('admin.laporan')
+    ->middleware('is_admin');
 
 //tambah data
-Route::post('admin/transaksi',[TransaksiController::class, 'add_transaction'])
-->name('admin.transaksi.submit')
-->middleware('is_admin');
+Route::post('admin/transaksi', [TransaksiController::class, 'add_transaction'])
+    ->name('admin.transaksi.submit')
+    ->middleware('is_admin');
 
 //edit data
-Route::patch('admin/transaksi/update',[TransaksiController::class, 'update_transaction'])
-->name('admin.transaksi.update')
-->middleware('is_admin');
-Route::get('admin/ajaxadmin/dataTransaksi/{id}',[TransaksiController::class, 'getDataTransaksi']);
+Route::patch('admin/transaksi/update', [TransaksiController::class, 'update_transaction'])
+    ->name('admin.transaksi.update')
+    ->middleware('is_admin');
+Route::get('admin/ajaxadmin/dataTransaksi/{id}', [TransaksiController::class, 'getDataTransaksi']);
 
 //delete data
 Route::delete('admin/transaksi/delete', [TransaksiController::class, 'destroy'])
-->name('admin.transaksi.delete')
-->middleware('is_admin');
+    ->name('admin.transaksi.delete')
+    ->middleware('is_admin');
 
-Route::get('admin/laporan_keluar/print_produk', [TransaksiController::class, 'print_produk'])
-->name('admin.print.transaksi')
-->middleware('is_admin');
+Route::get('admin/ajaxadmin/ambilData/{id}', [TransaksiController::class, 'getDataProduct']);
+
+Route::get('admin/laporan_keluar/print_transaksi', [TransaksiController::class, 'print_transaksi'])
+    ->name('admin.print.transaksi')
+    ->middleware('is_admin');
+
+Route::get('admin/laporan_keluar/export', [TransaksiController::class, 'export_transaksi'])
+    ->name('admin.export.transaksi')
+    ->middleware('is_admin');

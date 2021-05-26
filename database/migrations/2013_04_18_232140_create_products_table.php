@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name', 100);
             $table->foreignId('brands_id')->references('id')->on('brands')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('categories_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->bigInteger('harga')->index();
             $table->char('stok');
             $table->timestamps();

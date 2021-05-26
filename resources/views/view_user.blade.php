@@ -156,15 +156,15 @@
                                 <input min="0" type="text" class="form-control" name="password" id="edit-password" required />
                             </div>
                             <div class="form-group">
-                                <label for="roles_id">Roles/label>
-                                    <div class="input-group">
-                                        <select class="custom-select" name="roles_id" id="edit-roles_id" aria-label="Example select with button addon">
-                                            <option selected>Choose Here...</option>
-                                            <option value="1">Admin</option>
-                                            <option value="2">User</option>
-                                        </select>
+                                <label for="roles_id">Roles</label>
+                                <div class="input-group">
+                                    <select class="custom-select" name="roles_id" id="edit-roles_id" aria-label="Example select with button addon">
+                                        <option selected>Choose Here...</option>
+                                        <option value="1">Admin</option>
+                                        <option value="2">User</option>
+                                    </select>
 
-                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
